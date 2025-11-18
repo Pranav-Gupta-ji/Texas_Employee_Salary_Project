@@ -6,6 +6,7 @@ link_of_Salary_datasets : https://d3ilbtxij3aepc.cloudfront.net/projects/CDS-Cap
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-orange.svg)
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 ![Status](https://img.shields.io/badge/Status-Active-success.svg)
 
 **A Machine Learning solution for predicting Texas state employee salaries with 72% accuracy**
@@ -360,3 +361,4 @@ Predictions (Monthly Salary)
 
 
 </div>
+
