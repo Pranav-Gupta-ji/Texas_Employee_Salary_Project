@@ -6,7 +6,6 @@ link_of_Salary_datasets : https://d3ilbtxij3aepc.cloudfront.net/projects/CDS-Cap
 
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.0+-orange.svg)
-![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Status](https://img.shields.io/badge/Status-Active-success.svg)
 
 **A Machine Learning solution for predicting Texas state employee salaries with 72% accuracy**
@@ -33,7 +32,7 @@ This project builds a predictive model to forecast monthly salaries for Texas st
 ### 🤖 Machine Learning Model
 - **Decision Tree Regressor** with optimized hyperparameters
 - **Custom Sklearn Pipeline** with automated preprocessing
-- **72% prediction accuracy** (R² = 0.722)
+- **83% prediction accuracy** (R² = 0.832)
 - **Log-transformed target** for better predictions
 - **Sample weighting** to handle extreme salary values
 
@@ -54,10 +53,10 @@ This project builds a predictive model to forecast monthly salaries for Texas st
 
 | Metric | Value | Description |
 |--------|-------|-------------|
-| **R² Score** | 0.722 | Explains 72% of salary variance |
-| **Adjusted R²** | 0.722 | Adjusted for feature count |
-| **MAE** | $431.26 | Mean Absolute Error |
-| **RMSE** | $1,109.52 | Root Mean Squared Error |
+| **R² Score** | 0.832 | Explains 83% of salary variance |
+| **Adjusted R²** | 0.832 | Adjusted for feature count |
+| **MAE** | $3,843.19| Mean Absolute Error |
+| **RMSE** | $7,555.52 | Root Mean Squared Error |
 
 ### Performance Rating
 - ⭐⭐⭐⭐⭐⭐⭐⭐ **Model Accuracy** (8/10) - Strong for HR data
@@ -110,27 +109,22 @@ jupyter>=1.0.0
 ```python
 import joblib
 import pandas as pd
-from custom_transformers import (
-    ColumnNameCleaner, 
-    StatusFullPartTimeTransformer, 
-    Ethnicity_other
-)
 
-# Load the trained model
-model = joblib.load('model.pkl')
+# 1. Load model
+model = joblib.load('model_simple.pkl')
 
-# Prepare input data
+# 2. Prepare input
 new_employee = pd.DataFrame({
-    'AGENCY NAME': ['TEXAS DEPARTMENT OF CRIMINAL JUSTICE'],
-    'CLASS TITLE': ['CORREC OFFICER IV'],
+    'AGENCY_NAME': ['HEALTH AND HUMAN SERVICES COMMISSION'],
+    'CLASS_TITLE': ['REGISTERED NURSE'],
     'ETHNICITY': ['WHITE'],
-    'GENDER': ['MALE'],
-    'STATUS': ['CRF - CLASSIFIED REGULAR FULL-TIME']
+    'GENDER': ['FEMALE'],
+    'STATUS': ['FULL-TIME']
 })
 
-# Make prediction
+# 3. Predict salary
 predicted_salary = model.predict(new_employee)
-print(f"Predicted Monthly Salary: ${predicted_salary[0]:,.2f}")
+print(f"Predicted Annual Salary: ${predicted_salary[0]:,.2f}")
 ```
 
 ### Running the Jupyter Notebook
@@ -155,7 +149,7 @@ data = pd.read_csv('salary.csv')
 # Prepare features and target
 X = data[['AGENCY NAME', 'CLASS TITLE', 'ETHNICITY', 
           'GENDER', 'STATUS']]
-y = data['MONTHLY']
+y = data['ANNUAL']
 
 # Train-test split
 X_train, X_test, y_train, y_test = train_test_split(
@@ -185,7 +179,7 @@ predictions = pipeline.predict(X_test)
 | `ETHNICITY` | Categorical | Employee ethnicity | 5 |
 | `GENDER` | Binary | Male/Female | 2 |
 | `STATUS` | Categorical | Employment status | 11 → 2 |
-| `MONTHLY` | Numeric | **Target**: Monthly salary | Continuous |
+| `ANNUAL` | Numeric | **Target**: Annual salary | Continuous |
 
 ### Top 5 Agencies (70% of data)
 1. Texas Health and Human Services
@@ -274,6 +268,7 @@ Contributions are welcome! Please follow these steps:
 ## 📄 License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
 
 ## 🙏 Acknowledgments
 
@@ -362,5 +357,6 @@ Predictions (Monthly Salary)
 <div align="center">
 
 **Happy Predicting! 🚀**
+
 
 </div>
